@@ -1,0 +1,20 @@
+{
+  "name": "historyquest",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A cozy, pixel-styled choose-your-own-history game about scientists who changed the world.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.2"
+  }
+}
