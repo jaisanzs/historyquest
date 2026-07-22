@@ -96,7 +96,6 @@ export default function Home({ onPick }) {
       </div>
 
       <p style={{ ...bodyFont, textAlign: "center", color: C.inkSoft, fontSize: 19, marginTop: 26 }}>
-        Ten lives, all playable. Portraits are stylized — swap in real pixel art anytime.
       </p>
     </div>
   );
