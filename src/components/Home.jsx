@@ -1,6 +1,6 @@
 import { C, titleFont, bodyFont, pixelBorder } from "../theme.js";
 import { FIGURES } from "../data/figures.js";
-import PixelScene from "./PixelScene.jsx";
+import PixelPortrait from "./PixelPortrait.jsx";
 
 // Home screen: a grid of "player cards". Playable ones are clickable.
 export default function Home({ onPick }) {
@@ -48,12 +48,26 @@ export default function Home({ onPick }) {
               e.currentTarget.style.boxShadow = `4px 4px 0 ${C.border}`;
             }}
           >
-            <div style={{ position: "relative", background: f.accent }}>
-              <PixelScene
-                accent={f.accent}
-                accent2={f.accent2}
-                style={{ width: "100%", height: 120, display: "block" }}
-              />
+            <div
+              style={{
+                position: "relative",
+                height: 130,
+                background: `linear-gradient(${f.accent}, ${f.accent2})`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "hidden",
+              }}
+            >
+              {f.image ? (
+                <img
+                  src={f.image}
+                  alt={f.name}
+                  style={{ height: 130, imageRendering: "pixelated", display: "block" }}
+                />
+              ) : (
+                <PixelPortrait p={f.portrait} bg="transparent" size={130} />
+              )}
               <span
                 style={{
                   ...titleFont,
@@ -82,7 +96,7 @@ export default function Home({ onPick }) {
       </div>
 
       <p style={{ ...bodyFont, textAlign: "center", color: C.inkSoft, fontSize: 19, marginTop: 26 }}>
-        One life is fully playable. The greyed cards are the frame waiting to be filled.
+        Ten lives, all playable. Portraits are stylized — swap in real pixel art anytime.
       </p>
     </div>
   );

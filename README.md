@@ -56,3 +56,14 @@ src/
 
 Each story is validated to make sure every choice points to a real scene and
 every story has a start, an end, and sources.
+
+## Portraits
+
+Each card shows a stylized pixel portrait drawn in code (`components/PixelPortrait.jsx`)
+from a `portrait` traits object in `figures.js` — accurate skin tones, era hair
+and dress, and a signature detail each. They're deliberately dignified and
+stylized, not photorealistic likenesses.
+
+To use real pixel art instead, drop a PNG in `public/portraits/` and add an
+`image: "/portraits/<id>.png"` field to that figure in `figures.js`; the card
+renders the image automatically in place of the drawn portrait.
