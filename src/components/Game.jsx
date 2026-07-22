@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { C, titleFont, bodyFont, pixelBorder, barBtn, choiceBtn } from "../theme.js";
 import { STORIES } from "../data/stories.js";
-import { SOURCES } from "../data/sources.js";
 
 // Game screen: renders one story graph as a sequence of scenes with choices.
+// Each story provides its own citations via story.meta.sources.
 export default function Game({ figureId, onHome }) {
   const story = STORIES[figureId];
   const [sceneId, setSceneId] = useState("start");
   const [history, setHistory] = useState([]);
   const scene = story[sceneId];
+  const sources = story.meta.sources || [];
 
   const go = (to) => {
     setHistory((h) => [...h, sceneId]);
@@ -37,7 +38,7 @@ export default function Game({ figureId, onHome }) {
           flexWrap: "wrap",
         }}
       >
-        <button onClick={onHome} style={barBtn}>◄ Player cards</button>
+        <button onClick={onHome} style={barBtn}>&#9668; Player cards</button>
         <div style={{ ...titleFont, fontSize: 10, color: C.ink }}>{story.meta.name}</div>
         <button onClick={history.length ? back : restart} style={barBtn}>
           {history.length ? "↶ Back" : "↻ Restart"}
@@ -55,7 +56,7 @@ export default function Game({ figureId, onHome }) {
 
           {scene.note && (
             <div style={{ ...pixelBorder(C.goldDeep), background: "#fdf1d6", padding: "12px 14px", margin: "18px 0 4px" }}>
-              <div style={{ ...titleFont, color: C.goldDeep, fontSize: 9, marginBottom: 8 }}>✦ {scene.note.title}</div>
+              <div style={{ ...titleFont, color: C.goldDeep, fontSize: 9, marginBottom: 8 }}>&#10022; {scene.note.title}</div>
               <div style={{ ...bodyFont, color: C.ink, fontSize: 20, lineHeight: 1.2 }}>{scene.note.body}</div>
             </div>
           )}
@@ -80,7 +81,7 @@ export default function Game({ figureId, onHome }) {
                   e.currentTarget.style.boxShadow = `3px 3px 0 ${C.border}`;
                 }}
               >
-                ▸ {c.label}
+                &#9656; {c.label}
               </button>
             ))}
           </div>
@@ -91,18 +92,18 @@ export default function Game({ figureId, onHome }) {
               <div style={{ ...pixelBorder(C.greenDeep), background: "#eef6df", padding: "14px 16px" }}>
                 <div style={{ ...titleFont, color: C.greenDeep, fontSize: 10, marginBottom: 10 }}>Sources</div>
                 <div style={{ ...bodyFont, fontSize: 19, lineHeight: 1.35 }}>
-                  {SOURCES.map((s, i) => (
+                  {sources.map((s, i) => (
                     <div key={i} style={{ marginBottom: 4 }}>
                       <a href={s.u} target="_blank" rel="noreferrer" style={{ color: C.greenDeep }}>
-                        → {s.t}
+                        &#8594; {s.t}
                       </a>
                     </div>
                   ))}
                 </div>
               </div>
               <div style={{ display: "flex", gap: 10, marginTop: 16, flexWrap: "wrap" }}>
-                <button onClick={restart} style={{ ...choiceBtn, flex: 1 }}>↻ Play again</button>
-                <button onClick={onHome} style={{ ...choiceBtn, flex: 1 }}>◄ Other figures</button>
+                <button onClick={restart} style={{ ...choiceBtn, flex: 1 }}>&#8635; Play again</button>
+                <button onClick={onHome} style={{ ...choiceBtn, flex: 1 }}>&#9668; Other figures</button>
               </div>
             </div>
           )}

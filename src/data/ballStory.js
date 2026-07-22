@@ -1,21 +1,20 @@
 /*
-  The Alice Ball story graph.
-
-  Each scene has:
-    chapter  – label shown in the scene header
-    text     – the narration
-    note     – (optional) a sourced "fact card"
-    choices  – array of { label, to } where `to` is the next scene id
-    end       – (optional) true marks the finale (shows sources + replay)
-
-  To add a new figure: copy this shape into a new file, export it, and register
-  it in stories.js. Keep every historical claim tied to a source in sources.js.
+  Story graph shape (shared by every figure):
+    meta     – { name, subtitle, chapters, sources: [{ t, u }] }
+    <scene>  – { chapter, text, note?, choices: [{ label, to }], end? }
+  Keep every historical claim tied to a source in meta.sources.
 */
 export const BALL_STORY = {
   meta: {
     name: "Alice Augusta Ball",
     subtitle: "The chemist who freed a cure from an oil",
     chapters: 6,
+    sources: [
+      { t: "American Chemical Society — Alice Ball", u: "https://www.acs.org/education/whatischemistry/landmarks/alice-ball.html" },
+      { t: "National Women's History Museum — Alice Ball", u: "https://www.womenshistory.org/education-resources/biographies/alice-ball" },
+      { t: "National Geographic — Alice Ball & chaulmoogra oil", u: "https://www.nationalgeographic.com/science/article/alice-ball-leprosy-hansens-disease-hawaii-womens-history-science" },
+      { t: "Univ. of Nebraska Medical Center — Overlooked No More", u: "https://www.unmc.edu/healthsecurity/transmission/2023/04/11/overlooked-no-more-alice-ball-chemist-who-created-a-treatment-for-leprosy/" },
+    ],
   },
   start: {
     chapter: "Prologue · Seattle, 1892",
@@ -38,8 +37,7 @@ export const BALL_STORY = {
       "You earn not one but two degrees — pharmaceutical chemistry, then pharmacy. With a professor you co-write a ten-page paper in the Journal of the American Chemical Society. That's a rare feat for any student in the 1910s, and almost unheard of for a Black woman. Scholarship offers arrive.",
     note: {
       title: "Real history",
-      body:
-        "Ball earned two degrees at UW and co-authored a JACS paper before she was 22.",
+      body: "Ball earned two degrees at UW and co-authored a JACS paper before she was 22.",
     },
     choices: [{ label: "Take the offer from the College of Hawai‘i", to: "hawaii" }],
   },
@@ -49,8 +47,7 @@ export const BALL_STORY = {
       "In Hawai‘i you research the chemistry of the kava plant for your thesis. You become the first woman and the first African American to earn a master's from the College of Hawai‘i — and its first woman chemistry instructor, at 23. Then Dr. Harry Hollmann, a surgeon treating Hansen's disease, comes to you with a problem no one has cracked.",
     note: {
       title: "What is Hansen's disease?",
-      body:
-        "Hansen's disease (leprosy) is a slow bacterial infection. In 1915 there was no reliable cure, and patients were often forced into isolated settlements like the one on Moloka‘i.",
+      body: "Hansen's disease (leprosy) is a slow bacterial infection. In 1915 there was no reliable cure, and patients were often forced into isolated settlements like the one on Moloka‘i.",
     },
     choices: [{ label: "Hear Hollmann out", to: "problem" }],
   },
@@ -60,8 +57,7 @@ export const BALL_STORY = {
       "For centuries, oil pressed from chaulmoogra tree seeds had been the one thing that seemed to help. But it's a thick, sticky oil. Swallowed, it makes patients vomit. Injected raw, it's agonizing — it clumps under the skin in painful blisters and barely absorbs. Hollmann needs it to enter the body cleanly. How do you attack it, chemically?",
     note: {
       title: "The chemistry problem",
-      body:
-        "Chaulmoogra oil is a mix of fatty acids (mainly chaulmoogric and hydnocarpic acid) locked up as bulky, water-hating triglycerides. To inject it, you need something that mixes with the body's watery tissues.",
+      body: "Chaulmoogra oil is a mix of fatty acids (mainly chaulmoogric and hydnocarpic acid) locked up as bulky, water-hating triglycerides. To inject it, you need something that mixes with the body's watery tissues.",
     },
     choices: [
       { label: "Convert the fatty acids into ethyl esters", to: "breakthrough" },
@@ -75,8 +71,7 @@ export const BALL_STORY = {
       "You try beating the oil into a milky emulsion. It looks promising in the flask — then separates. Under the skin it still clumps and hurts. Emulsions of the whole oil had been tried before; the body just won't take them reliably. Back to the molecule itself.",
     note: {
       title: "Why it fails",
-      body:
-        "An emulsion is just tiny droplets of the same water-hating oil suspended in water. The underlying molecule hasn't changed, so it still won't absorb.",
+      body: "An emulsion is just tiny droplets of the same water-hating oil suspended in water. The underlying molecule hasn't changed, so it still won't absorb.",
     },
     choices: [{ label: "Rethink the molecule", to: "problem_retry" }],
   },
@@ -86,8 +81,7 @@ export const BALL_STORY = {
       "You saponify the acids into sodium salts — a soap. Now they dissolve in water. But injected, the soap irritates and damages tissue, and it's chemically touchy. Water-soluble isn't enough; it has to be gentle and stable too. There's a subtler move.",
     note: {
       title: "Why it falls short",
-      body:
-        "Soaps (fatty-acid salts) dissolve in water but are irritating and unstable. You want the fatty acids in a form that's injectable AND kind to the body.",
+      body: "Soaps (fatty-acid salts) dissolve in water but are irritating and unstable. You want the fatty acids in a form that's injectable AND kind to the body.",
     },
     choices: [{ label: "Find the subtler move", to: "problem_retry" }],
   },
@@ -103,8 +97,7 @@ export const BALL_STORY = {
       "You isolate the active fatty acids from chaulmoogra oil and convert them into ethyl esters — a form that's water-mixing, injectable, and absorbed by the body. Patients can finally be treated without the vomiting and the blistering. You are 23 years old, and you've done what trained chemists couldn't. You start writing it up.",
     note: {
       title: "The breakthrough",
-      body:
-        "Ball's isolation of the ethyl esters of chaulmoogra fatty acids became the first genuinely usable injectable treatment for Hansen's disease — later called the 'Ball Method'.",
+      body: "Ball's isolation of the ethyl esters of chaulmoogra fatty acids became the first genuinely usable injectable treatment for Hansen's disease — later called the 'Ball Method'.",
     },
     choices: [{ label: "Continue", to: "death" }],
   },
@@ -114,8 +107,7 @@ export const BALL_STORY = {
       "Late in 1916, before you can publish, you fall seriously ill. You return to Seattle, and on December 31, 1916, you die — just 24 years old. The most repeated account says you inhaled chlorine gas while demonstrating a gas mask to your class. Your death records were later altered, so historians say the true cause is genuinely uncertain.",
     note: {
       title: "Handle with care",
-      body:
-        "You'll see the 'chlorine gas' story stated as fact everywhere. It may be true, but the evidence is thin and the records were tampered with — so a fair lesson calls it the leading account, not a certainty.",
+      body: "You'll see the 'chlorine gas' story stated as fact everywhere. It may be true, but the evidence is thin and the records were tampered with — so a fair lesson calls it the leading account, not a certainty.",
     },
     choices: [{ label: "What happened to the work?", to: "credit" }],
   },
@@ -125,8 +117,7 @@ export const BALL_STORY = {
       "Arthur Dean, the college president and a chemist, keeps producing the treatment after your death — and publishes it without naming you, calling it the 'Dean Method'. For years, your name is missing from your own discovery. Then in 1922, Dr. Hollmann publishes a paper setting the record straight and calling it, correctly, the Ball Method.",
     note: {
       title: "The Matilda Effect",
-      body:
-        "When a woman's scientific work gets credited to a man, historians call it the 'Matilda Effect'. Ball is one of its clearest cases — and one of the few later corrected.",
+      body: "When a woman's scientific work gets credited to a man, historians call it the 'Matilda Effect'. Ball is one of its clearest cases — and one of the few later corrected.",
     },
     choices: [{ label: "See your legacy", to: "legacy" }],
   },
