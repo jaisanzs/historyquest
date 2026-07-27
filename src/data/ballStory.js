@@ -54,42 +54,25 @@ export const BALL_STORY = {
   problem: {
     chapter: "Chapter 3 · The oil that won't cooperate",
     text:
-      "For centuries, oil pressed from chaulmoogra tree seeds had been the one thing that seemed to help. But it's a thick, sticky oil. Swallowed, it makes patients vomit. Injected raw, it's agonizing — it clumps under the skin in painful blisters and barely absorbs. Hollmann needs it to enter the body cleanly. How do you attack it, chemically?",
+      "For centuries, oil pressed from chaulmoogra tree seeds had been the one thing that seemed to help — but it's a thick, sticky oil. Swallowed, it makes patients vomit; injected raw, it clumps into painful blisters and barely absorbs. Hollmann needs it to enter the body cleanly. Time to work at the bench.",
     note: {
       title: "The chemistry problem",
-      body: "Chaulmoogra oil is a mix of fatty acids (mainly chaulmoogric and hydnocarpic acid) locked up as bulky, water-hating triglycerides. To inject it, you need something that mixes with the body's watery tissues.",
+      body: "Chaulmoogra oil's active parts are fatty acids (R–COOH) locked in bulky, water-hating fat. To inject them, you need a form that mixes with the body's watery tissue — but is also gentle.",
     },
-    choices: [
-      { label: "Convert the fatty acids into ethyl esters", to: "breakthrough" },
-      { label: "Just emulsify the raw oil with water", to: "wrong_emulsify" },
-      { label: "Turn the acids into a sodium soap", to: "wrong_soap" },
-    ],
-  },
-  wrong_emulsify: {
-    chapter: "Chapter 3 · A dead end",
-    text:
-      "You try beating the oil into a milky emulsion. It looks promising in the flask — then separates. Under the skin it still clumps and hurts. Emulsions of the whole oil had been tried before; the body just won't take them reliably. Back to the molecule itself.",
-    note: {
-      title: "Why it fails",
-      body: "An emulsion is just tiny droplets of the same water-hating oil suspended in water. The underlying molecule hasn't changed, so it still won't absorb.",
+    puzzle: {
+      type: "reaction",
+      to: "breakthrough",
+      prompt: "Pick the reagent that turns the fatty acid into a mild, water-mixing form you can inject.",
+      start: { name: "Chaulmoogra fatty acid", formula: "R\u2013COOH" },
+      goal: { name: "Ethyl ester (injectable!)", formula: "R\u2013COOC\u2082H\u2085" },
+      reagents: [
+        { name: "Water", formula: "H\u2082O", correct: false, explain: "That only makes an emulsion \u2014 tiny oil droplets in water. The molecule itself is unchanged, so it still won't absorb and it separates." },
+        { name: "Sodium hydroxide", formula: "NaOH", correct: false, explain: "That makes a soap (a salt of the acid). It dissolves in water, but injected it irritates and damages tissue." },
+        { name: "Ethanol", formula: "C\u2082H\u2085OH", correct: true, explain: "Yes! Acid + alcohol \u2192 ester. The bulky fatty acid becomes a light ethyl ester that mixes with the body and injects cleanly." },
+      ],
+      successMsg: "That's the Ball Method: the ethyl esters of chaulmoogra oil.",
     },
-    choices: [{ label: "Rethink the molecule", to: "problem_retry" }],
-  },
-  wrong_soap: {
-    chapter: "Chapter 3 · Close, but harsh",
-    text:
-      "You saponify the acids into sodium salts — a soap. Now they dissolve in water. But injected, the soap irritates and damages tissue, and it's chemically touchy. Water-soluble isn't enough; it has to be gentle and stable too. There's a subtler move.",
-    note: {
-      title: "Why it falls short",
-      body: "Soaps (fatty-acid salts) dissolve in water but are irritating and unstable. You want the fatty acids in a form that's injectable AND kind to the body.",
-    },
-    choices: [{ label: "Find the subtler move", to: "problem_retry" }],
-  },
-  problem_retry: {
-    chapter: "Chapter 3 · The elegant answer",
-    text:
-      "You come back to the acids themselves. Instead of a salt, you cap each fatty acid with an ethyl group — you make ethyl esters. The bulky triglyceride is gone; what's left is light, freely mixing, and mild enough to inject. That's the key.",
-    choices: [{ label: "Isolate the ethyl esters", to: "breakthrough" }],
+    choices: [],
   },
   breakthrough: {
     chapter: "Chapter 4 · The Ball Method",

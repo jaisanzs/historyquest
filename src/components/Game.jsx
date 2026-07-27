@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { C, titleFont, bodyFont, pixelBorder, barBtn, choiceBtn } from "../theme.js";
 import { STORIES } from "../data/stories.js";
+import { QUIZZES } from "../data/quizzes.js";
+import { markCompleted } from "../progress.js";
+import ReactionPuzzle from "./ReactionPuzzle.jsx";
+import Quiz from "./Quiz.jsx";
 
-// Game screen: renders one story graph as a sequence of scenes with choices.
-// Each story provides its own citations via story.meta.sources.
 export default function Game({ figureId, onHome }) {
   const story = STORIES[figureId];
+  const quiz = QUIZZES[figureId];
   const [sceneId, setSceneId] = useState("start");
   const [history, setHistory] = useState([]);
+  const [mode, setMode] = useState("story"); // "story" | "quiz"
   const scene = story[sceneId];
   const sources = story.meta.sources || [];
 
@@ -23,21 +27,31 @@ export default function Game({ figureId, onHome }) {
   const restart = () => {
     setHistory([]);
     setSceneId("start");
+    setMode("story");
   };
+
+  if (mode === "quiz") {
+    return (
+      <div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+          <button onClick={onHome} style={barBtn}>&#9668; Player cards</button>
+          <div style={{ ...titleFont, fontSize: 10, color: C.ink }}>{story.meta.name}</div>
+          <span style={{ width: 90 }} />
+        </div>
+        <Quiz
+          questions={quiz}
+          onComplete={(s, t) => markCompleted(figureId, s, t)}
+          onHome={onHome}
+          onRestart={restart}
+        />
+      </div>
+    );
+  }
 
   return (
     <div>
       {/* top bar */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 16,
-          gap: 8,
-          flexWrap: "wrap",
-        }}
-      >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, gap: 8, flexWrap: "wrap" }}>
         <button onClick={onHome} style={barBtn}>&#9668; Player cards</button>
         <div style={{ ...titleFont, fontSize: 10, color: C.ink }}>{story.meta.name}</div>
         <button onClick={history.length ? back : restart} style={barBtn}>
@@ -61,30 +75,37 @@ export default function Game({ figureId, onHome }) {
             </div>
           )}
 
+          {/* interactive puzzle scene */}
+          {scene.puzzle && (
+            <ReactionPuzzle config={scene.puzzle} onSolve={() => go(scene.puzzle.to)} />
+          )}
+
           {/* choices */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 22 }}>
-            {scene.choices.map((c, i) => (
-              <button
-                key={i}
-                onClick={() => go(c.to)}
-                style={choiceBtn}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = C.green;
-                  e.currentTarget.style.color = "#fff";
-                  e.currentTarget.style.transform = "translate(-2px,-2px)";
-                  e.currentTarget.style.boxShadow = `5px 5px 0 ${C.border}`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = C.paper;
-                  e.currentTarget.style.color = C.ink;
-                  e.currentTarget.style.transform = "translate(0,0)";
-                  e.currentTarget.style.boxShadow = `3px 3px 0 ${C.border}`;
-                }}
-              >
-                &#9656; {c.label}
-              </button>
-            ))}
-          </div>
+          {!scene.puzzle && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 22 }}>
+              {scene.choices.map((c, i) => (
+                <button
+                  key={i}
+                  onClick={() => go(c.to)}
+                  style={choiceBtn}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = C.green;
+                    e.currentTarget.style.color = "#fff";
+                    e.currentTarget.style.transform = "translate(-2px,-2px)";
+                    e.currentTarget.style.boxShadow = `5px 5px 0 ${C.border}`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = C.paper;
+                    e.currentTarget.style.color = C.ink;
+                    e.currentTarget.style.transform = "translate(0,0)";
+                    e.currentTarget.style.boxShadow = `3px 3px 0 ${C.border}`;
+                  }}
+                >
+                  &#9656; {c.label}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* finale */}
           {scene.end && (
@@ -94,14 +115,19 @@ export default function Game({ figureId, onHome }) {
                 <div style={{ ...bodyFont, fontSize: 19, lineHeight: 1.35 }}>
                   {sources.map((s, i) => (
                     <div key={i} style={{ marginBottom: 4 }}>
-                      <a href={s.u} target="_blank" rel="noreferrer" style={{ color: C.greenDeep }}>
-                        &#8594; {s.t}
-                      </a>
+                      <a href={s.u} target="_blank" rel="noreferrer" style={{ color: C.greenDeep }}>&#8594; {s.t}</a>
                     </div>
                   ))}
                 </div>
               </div>
               <div style={{ display: "flex", gap: 10, marginTop: 16, flexWrap: "wrap" }}>
+                {quiz && (
+                  <button onClick={() => setMode("quiz")} style={{ ...choiceBtn, flex: 1, background: C.greenDeep, color: "#fff" }}>
+                    &#9656; Take the quiz &amp; earn your badge
+                  </button>
+                )}
+              </div>
+              <div style={{ display: "flex", gap: 10, marginTop: 10, flexWrap: "wrap" }}>
                 <button onClick={restart} style={{ ...choiceBtn, flex: 1 }}>&#8635; Play again</button>
                 <button onClick={onHome} style={{ ...choiceBtn, flex: 1 }}>&#9668; Other figures</button>
               </div>
