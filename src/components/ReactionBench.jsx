@@ -11,16 +11,19 @@ import { C, titleFont, bodyFont, pixelBorder } from "../theme.js";
              reagents:[{name,formula,color,correct,explain}], successMsg }
 */
 
-function Bottle({ color, label, size = 46 }) {
+function Bottle({ color, size = 52 }) {
+  // clean reagent bottle: cork + glass body + colored liquid + shine (no crammed text)
   return (
-    <svg viewBox="0 0 16 22" width={size} height={size * 1.375} shapeRendering="crispEdges" style={{ imageRendering: "pixelated", display: "block" }}>
-      <rect x="6" y="1" width="4" height="3" fill="#cfc8ba" />
-      <rect x="5" y="4" width="6" height="1" fill="#3a2b1c" />
-      <rect x="3" y="5" width="10" height="16" fill="#e9eef0" />
-      <rect x="3" y="5" width="10" height="16" fill="none" stroke="#3a2b1c" strokeWidth="1" />
-      <rect x="4" y="12" width="8" height="8" fill={color} />
-      <rect x="4" y="11" width="8" height="1" fill="#ffffff" fillOpacity="0.5" />
-      <text x="8" y="10" fontFamily="monospace" fontSize="4" textAnchor="middle" fill="#3a2b1c">{label}</text>
+    <svg viewBox="0 0 20 30" width={size} height={size * 1.5} shapeRendering="crispEdges" style={{ imageRendering: "pixelated", display: "block" }}>
+      <rect x="8" y="0" width="4" height="3" fill="#b5843f" />
+      <rect x="8" y="3" width="4" height="1" fill="#7a5a2e" />
+      <rect x="8" y="4" width="4" height="3" fill="#dfe8ea" />
+      <rect x="6" y="7" width="8" height="2" fill="#dfe8ea" />
+      <rect x="5" y="9" width="10" height="19" fill="#e9eef0" />
+      <rect x="5" y="9" width="10" height="19" fill="none" stroke="#3a2b1c" strokeWidth="1" />
+      <rect x="6" y="16" width="8" height="11" fill={color} />
+      <rect x="6" y="15" width="8" height="1" fill="#ffffff" fillOpacity="0.55" />
+      <rect x="7" y="11" width="1" height="14" fill="#ffffff" fillOpacity="0.4" />
     </svg>
   );
 }
@@ -134,7 +137,7 @@ export default function ReactionBench({ config, onSolve }) {
       {!solved && (
         <div>
           <div style={{ borderTop: `3px solid ${C.border}`, marginTop: 6, paddingTop: 12 }} />
-          <div style={{ display: "flex", justifyContent: "center", gap: 18, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: 30, flexWrap: "wrap", padding: "4px 0 2px" }}>
             {config.reagents.map((r, i) => {
               const used = tried.includes(i);
               return (
@@ -149,9 +152,10 @@ export default function ReactionBench({ config, onSolve }) {
                     touchAction: "none", userSelect: "none",
                   }}
                 >
-                  <Bottle color={r.color} label={r.formula} />
-                  <div style={{ ...bodyFont, fontSize: 16, color: C.ink }}>{r.name}</div>
-                  {used && <div style={{ ...bodyFont, fontSize: 14, color: C.rose }}>✕ nope</div>}
+                  <Bottle color={r.color} />
+                  <div style={{ ...bodyFont, fontSize: 18, color: C.ink, marginTop: 2 }}>{r.name}</div>
+                  <div style={{ ...titleFont, fontSize: 8, color: C.goldDeep, marginTop: 3 }}>{r.formula}</div>
+                  {used && <div style={{ ...bodyFont, fontSize: 15, color: C.rose, marginTop: 2 }}>✕ nope</div>}
                 </div>
               );
             })}
@@ -162,7 +166,7 @@ export default function ReactionBench({ config, onSolve }) {
       {/* floating dragged bottle */}
       {drag && (
         <div style={{ position: "fixed", left: drag.x, top: drag.y, transform: "translate(-50%,-50%)", pointerEvents: "none", zIndex: 50 }}>
-          <Bottle color={config.reagents[drag.i].color} label={config.reagents[drag.i].formula} size={54} />
+          <Bottle color={config.reagents[drag.i].color} size={60} />
         </div>
       )}
 

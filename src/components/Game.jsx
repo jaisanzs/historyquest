@@ -3,17 +3,29 @@ import { C, titleFont, bodyFont, pixelBorder, barBtn, choiceBtn } from "../theme
 import { STORIES } from "../data/stories.js";
 import { QUIZZES } from "../data/quizzes.js";
 import { markCompleted } from "../progress.js";
+import { PUZZLES } from "../data/puzzles.js";
 import ReactionBench from "./ReactionBench.jsx";
+import DragMatchPuzzle from "./DragMatchPuzzle.jsx";
+import DialPuzzle from "./DialPuzzle.jsx";
 import Quiz from "./Quiz.jsx";
 
 export default function Game({ figureId, onHome }) {
   const story = STORIES[figureId];
   const quiz = QUIZZES[figureId];
+  const puzzle = PUZZLES[figureId];
   const [sceneId, setSceneId] = useState("start");
   const [history, setHistory] = useState([]);
   const [mode, setMode] = useState("story"); // "story" | "quiz"
   const scene = story[sceneId];
   const sources = story.meta.sources || [];
+  const showPuzzle = puzzle && puzzle.sceneId === sceneId;
+
+  const renderPuzzle = () => {
+    const onSolve = () => go(puzzle.to);
+    if (puzzle.type === "reaction") return <ReactionBench config={puzzle} onSolve={onSolve} />;
+    if (puzzle.type === "dial") return <DialPuzzle config={puzzle} onSolve={onSolve} />;
+    return <DragMatchPuzzle config={puzzle} onSolve={onSolve} />;
+  };
 
   const go = (to) => {
     setHistory((h) => [...h, sceneId]);
@@ -76,12 +88,10 @@ export default function Game({ figureId, onHome }) {
           )}
 
           {/* interactive puzzle scene */}
-          {scene.puzzle && (
-            <ReactionBench config={scene.puzzle} onSolve={() => go(scene.puzzle.to)} />
-          )}
+          {showPuzzle && renderPuzzle()}
 
           {/* choices */}
-          {!scene.puzzle && (
+          {!showPuzzle && !scene.end && (
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 22 }}>
               {scene.choices.map((c, i) => (
                 <button

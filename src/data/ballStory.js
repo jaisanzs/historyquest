@@ -59,20 +59,7 @@ export const BALL_STORY = {
       title: "The chemistry problem",
       body: "Chaulmoogra oil's active parts are fatty acids (R–COOH) locked in bulky, water-hating fat. To inject them, you need a form that mixes with the body's watery tissue — but is also gentle.",
     },
-    puzzle: {
-      type: "reaction",
-      to: "breakthrough",
-      prompt: "Pick the reagent that turns the fatty acid into a mild, water-mixing form you can inject.",
-      start: { name: "Chaulmoogra fatty acid", formula: "R\u2013COOH", color: "#c88a3a" },
-      goal: { name: "Ethyl ester (injectable!)", formula: "R\u2013COOC\u2082H\u2085", color: "#7fa650" },
-      reagents: [
-        { name: "Water", formula: "H\u2082O", color: "#6fa8dc", correct: false, explain: "That only makes an emulsion \u2014 tiny oil droplets in water. The molecule itself is unchanged, so it still won't absorb and it separates." },
-        { name: "Sodium hydroxide", formula: "NaOH", color: "#b8b2a6", correct: false, explain: "That makes a soap (a salt of the acid). It dissolves in water, but injected it irritates and damages tissue." },
-        { name: "Ethanol", formula: "C\u2082H\u2085OH", color: "#e0a24e", correct: true, explain: "Yes! Acid + alcohol \u2192 ester. The bulky fatty acid becomes a light ethyl ester that mixes with the body and injects cleanly." },
-      ],
-      successMsg: "That's the Ball Method: the ethyl esters of chaulmoogra oil.",
-    },
-    choices: [],
+    choices: [{ label: "Work at the bench \u2192", to: "breakthrough" }],
   },
   breakthrough: {
     chapter: "Chapter 4 · The Ball Method",
