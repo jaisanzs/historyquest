@@ -3,7 +3,7 @@ import { C, titleFont, bodyFont, pixelBorder, barBtn, choiceBtn } from "../theme
 import { STORIES } from "../data/stories.js";
 import { QUIZZES } from "../data/quizzes.js";
 import { markCompleted } from "../progress.js";
-import ReactionPuzzle from "./ReactionPuzzle.jsx";
+import ReactionBench from "./ReactionBench.jsx";
 import Quiz from "./Quiz.jsx";
 
 export default function Game({ figureId, onHome }) {
@@ -77,7 +77,7 @@ export default function Game({ figureId, onHome }) {
 
           {/* interactive puzzle scene */}
           {scene.puzzle && (
-            <ReactionPuzzle config={scene.puzzle} onSolve={() => go(scene.puzzle.to)} />
+            <ReactionBench config={scene.puzzle} onSolve={() => go(scene.puzzle.to)} />
           )}
 
           {/* choices */}
