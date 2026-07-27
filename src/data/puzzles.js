@@ -32,36 +32,27 @@ export const PUZZLES = {
   },
 
   kwolek: {
-    type: "match", sceneId: "task", to: "solution", ordered: false,
-    prompt: "Which polymer chains will spin into a super-strong fiber, and which just tangle?",
-    targets: [
-      { id: "strong", label: "Lines up → strong fiber", color: "#4f6f34" },
-      { id: "weak", label: "Tangles → weak", color: "#c96f6f" },
-    ],
-    items: [
-      { label: "Rigid rod-like chain", target: "strong" },
-      { label: "Stiff, straight chain", target: "strong" },
-      { label: "Floppy coiled chain", target: "weak" },
-      { label: "Bendy, tangled chain", target: "weak" },
-    ],
-    successMsg: "Right — rigid, rod-like chains line up into a liquid crystal and spin into Kevlar's incredible fiber. The floppy ones just tangle.",
+    type: "spin", sceneId: "task", to: "solution",
+    prompt: "Spin the cloudy liquid-crystal solution into fiber — draw it out again and again.",
+    spins: 5, label: "Fiber strength", machineLabel: "Spinneret", doneLabel: "Fiber spun!",
+    glow: "#e6b25a", glowLite: "#f6e0b0",
+    hint: "Draw the fiber out, again and again.",
+    successMsg: "The rigid, rod-like chains line up into a liquid crystal and spin into Kevlar \u2014 about five times stronger than steel by weight.",
   },
 
   carver: {
-    type: "match", sceneId: "science", to: "products", ordered: false,
-    prompt: "Sort the crops: which drain the soil, and which feed nitrogen back into it?",
-    targets: [
-      { id: "drain", label: "Drains the soil" },
-      { id: "feed", label: "Feeds it back (legumes fix nitrogen)" },
+    type: "meter", sceneId: "science", to: "products",
+    prompt: "Heal the worn-out soil. Tap crops to bring the nitrogen back up to the mark.",
+    meterLabel: "Soil nitrogen", start: 25, goal: 100,
+    hint: "Legumes (peanut, cowpea, soybean) fix nitrogen. Cotton and corn drain it.",
+    options: [
+      { label: "Peanut", delta: 30, kind: "good", icon: "leaf" },
+      { label: "Cowpea", delta: 30, kind: "good", icon: "leaf" },
+      { label: "Soybean", delta: 25, kind: "good", icon: "leaf" },
+      { label: "Cotton", delta: -15, kind: "bad", icon: "boll" },
+      { label: "Corn", delta: -10, kind: "bad", icon: "boll" },
     ],
-    items: [
-      { label: "Cotton", target: "drain" },
-      { label: "Corn", target: "drain" },
-      { label: "Peanut", target: "feed" },
-      { label: "Cowpea", target: "feed" },
-      { label: "Soybean", target: "feed" },
-    ],
-    successMsg: "Exactly — legumes host root bacteria that pull nitrogen from the air. Rotate them with cotton and the soil heals.",
+    successMsg: "That's the secret: rotate nitrogen-fixing legumes with cotton and the soil recovers.",
   },
 
   molina: {
@@ -78,16 +69,16 @@ export const PUZZLES = {
   },
 
   rillieux: {
-    type: "match", sceneId: "science", to: "build", ordered: true,
-    prompt: "Put Rillieux's fuel-saving evaporator in the right order.",
-    targets: [{ id: "s1", label: "" }, { id: "s2", label: "" }, { id: "s3", label: "" }, { id: "s4", label: "" }],
-    items: [
-      { label: "Seal the juice in a vacuum pan (it boils cooler)", target: "s1" },
-      { label: "Boil chamber 1 to make vapor", target: "s2" },
-      { label: "Use that vapor to heat chamber 2", target: "s3" },
-      { label: "Repeat down the line → pure sugar, little fuel", target: "s4" },
+    type: "reactor", sceneId: "science", to: "build",
+    prompt: "Build Rillieux's fuel-saving evaporator, step by step.",
+    vessel: { from: "#cdb58a", to: "#f0e6cf" },
+    steps: [
+      { id: "seal", label: "Seal under vacuum", icon: "lock" },
+      { id: "boil", label: "Boil chamber 1", icon: "flame" },
+      { id: "pipe", label: "Pass vapor onward", icon: "pipe" },
+      { id: "sugar", label: "Collect pure sugar", icon: "cube" },
     ],
-    successMsg: "That's the multiple-effect evaporator: each chamber's vapor heats the next, reusing the same heat again and again.",
+    successMsg: "Each chamber's vapor heats the next, reusing the same heat again and again \u2014 the multiple-effect evaporator.",
   },
 
   curie: {
@@ -99,16 +90,16 @@ export const PUZZLES = {
   },
 
   elion: {
-    type: "match", sceneId: "science", to: "drug", ordered: true,
-    prompt: "Order Elion's 'rational design' of a leukemia drug.",
-    targets: [{ id: "s1", label: "" }, { id: "s2", label: "" }, { id: "s3", label: "" }, { id: "s4", label: "" }],
-    items: [
-      { label: "Study how cancer cells copy DNA differently", target: "s1" },
-      { label: "Target the purine building blocks (A, G)", target: "s2" },
-      { label: "Design a decoy purine — swap one oxygen for sulfur", target: "s3" },
-      { label: "The fake jams the cancer cell → 6-mercaptopurine", target: "s4" },
+    type: "reaction", sceneId: "science", to: "drug",
+    prompt: "Build the decoy purine: swap one atom to fool the cancer cell.",
+    start: { name: "Purine base", formula: "6-oxo", color: "#b79ad0" },
+    goal: { name: "6-mercaptopurine", formula: "6-thio", color: "#7fa650" },
+    reagents: [
+      { name: "Oxygen", formula: "O", color: "#6fa8dc", correct: false, explain: "It already has an oxygen there \u2014 no change, and no drug." },
+      { name: "Carbon", formula: "C", color: "#3a3a3a", correct: false, explain: "That breaks the purine instead of mimicking it." },
+      { name: "Sulfur", formula: "S", color: "#e0c24e", correct: true, explain: "Yes! Swapping the 6-oxygen for sulfur makes 6-mercaptopurine \u2014 a fake purine the cancer cell mistakes for the real thing." },
     ],
-    successMsg: "That's rational drug design: understand the target first, then build a molecule to block it.",
+    successMsg: "6-mercaptopurine: the decoy that jams a leukemia cell's DNA.",
   },
 
   hodgkin: {

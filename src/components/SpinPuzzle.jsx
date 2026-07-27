@@ -6,6 +6,8 @@ import { C, titleFont, bodyFont, pixelBorder } from "../theme.js";
 export default function SpinPuzzle({ config, onSolve }) {
   const [count, setCount] = useState(0);
   const [spinning, setSpinning] = useState(false);
+  const glow = config.glow || "#bfe3a0";
+  const glowLite = config.glowLite || "#eaf7d6";
   const pct = Math.min(100, Math.round((count / config.spins) * 100));
   const done = count >= config.spins;
 
@@ -20,7 +22,7 @@ export default function SpinPuzzle({ config, onSolve }) {
       <style>{`@keyframes hqWhirl{from{transform:rotate(0)}to{transform:rotate(360deg)}}.hq-whirl{animation:hqWhirl .65s ease-in-out}`}</style>
 
       <div style={{ ...pixelBorder(C.greenDeep), background: "#eef6df", padding: "10px 14px", marginBottom: 14 }}>
-        <span style={{ ...titleFont, fontSize: 9, color: C.greenDeep }}>&#9670; Crystallizer</span>
+        <span style={{ ...titleFont, fontSize: 9, color: C.greenDeep }}>&#9670; {config.machineLabel || "Crystallizer"}</span>
         <div style={{ ...bodyFont, fontSize: 20, color: C.ink, marginTop: 6, lineHeight: 1.15 }}>{config.prompt}</div>
       </div>
 
@@ -31,8 +33,8 @@ export default function SpinPuzzle({ config, onSolve }) {
             <circle cx="24" cy="24" r="20" fill="#e3ebed" stroke="#3a2b1c" strokeWidth="1" />
             <circle cx="24" cy="24" r="20" fill="none" stroke="#9aa6a8" strokeWidth="1" />
             {/* radium glow grows with purity */}
-            <circle cx="24" cy="24" r={4 + (pct / 100) * 12} fill="#bfe3a0" fillOpacity="0.9" />
-            <circle cx="24" cy="24" r={2 + (pct / 100) * 6} fill="#eaf7d6" />
+            <circle cx="24" cy="24" r={4 + (pct / 100) * 12} fill={glow} fillOpacity="0.9" />
+            <circle cx="24" cy="24" r={2 + (pct / 100) * 6} fill={glowLite} />
             {/* sediment specks */}
             <rect x="16" y="30" width="2" height="2" fill="#c88a3a" />
             <rect x="30" y="28" width="2" height="2" fill="#c88a3a" />
@@ -60,12 +62,12 @@ export default function SpinPuzzle({ config, onSolve }) {
           >
             {spinning ? "spinning…" : "↻ SPIN"}
           </button>
-          <div style={{ ...bodyFont, fontSize: 16, color: C.inkSoft, marginTop: 8 }}>Dissolve &amp; re-crystallize — again and again.</div>
+          <div style={{ ...bodyFont, fontSize: 16, color: C.inkSoft, marginTop: 8 }}>{config.hint || "Again and again."}</div>
         </div>
       ) : (
         <div>
           <div style={{ ...pixelBorder(C.greenDeep), background: "#eef6df", padding: "12px 14px" }}>
-            <div style={{ ...titleFont, fontSize: 9, color: C.greenDeep, marginBottom: 6 }}>✓ Radium isolated!</div>
+            <div style={{ ...titleFont, fontSize: 9, color: C.greenDeep, marginBottom: 6 }}>✓ {config.doneLabel || "Radium isolated!"}</div>
             <div style={{ ...bodyFont, fontSize: 19, color: C.ink, lineHeight: 1.2 }}>{config.successMsg}</div>
           </div>
           <button onClick={onSolve} style={{ ...bodyFont, fontSize: 21, color: "#fff", background: C.greenDeep, border: `3px solid ${C.border}`, boxShadow: `3px 3px 0 ${C.border}`, padding: "10px 16px", cursor: "pointer", marginTop: 12 }}>&#9656; Continue</button>

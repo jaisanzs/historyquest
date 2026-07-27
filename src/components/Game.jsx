@@ -9,6 +9,7 @@ import DragMatchPuzzle from "./DragMatchPuzzle.jsx";
 import DialPuzzle from "./DialPuzzle.jsx";
 import ReactorPuzzle from "./ReactorPuzzle.jsx";
 import SpinPuzzle from "./SpinPuzzle.jsx";
+import MeterPuzzle from "./MeterPuzzle.jsx";
 import Quiz from "./Quiz.jsx";
 
 export default function Game({ figureId, onHome }) {
@@ -28,6 +29,7 @@ export default function Game({ figureId, onHome }) {
     if (puzzle.type === "dial") return <DialPuzzle config={puzzle} onSolve={onSolve} />;
     if (puzzle.type === "reactor") return <ReactorPuzzle config={puzzle} onSolve={onSolve} />;
     if (puzzle.type === "spin") return <SpinPuzzle config={puzzle} onSolve={onSolve} />;
+    if (puzzle.type === "meter") return <MeterPuzzle config={puzzle} onSolve={onSolve} />;
     return <DragMatchPuzzle config={puzzle} onSolve={onSolve} />;
   };
 
