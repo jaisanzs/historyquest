@@ -7,6 +7,8 @@ import { PUZZLES } from "../data/puzzles.js";
 import ReactionBench from "./ReactionBench.jsx";
 import DragMatchPuzzle from "./DragMatchPuzzle.jsx";
 import DialPuzzle from "./DialPuzzle.jsx";
+import ReactorPuzzle from "./ReactorPuzzle.jsx";
+import SpinPuzzle from "./SpinPuzzle.jsx";
 import Quiz from "./Quiz.jsx";
 
 export default function Game({ figureId, onHome }) {
@@ -24,6 +26,8 @@ export default function Game({ figureId, onHome }) {
     const onSolve = () => go(puzzle.to);
     if (puzzle.type === "reaction") return <ReactionBench config={puzzle} onSolve={onSolve} />;
     if (puzzle.type === "dial") return <DialPuzzle config={puzzle} onSolve={onSolve} />;
+    if (puzzle.type === "reactor") return <ReactorPuzzle config={puzzle} onSolve={onSolve} />;
+    if (puzzle.type === "spin") return <SpinPuzzle config={puzzle} onSolve={onSolve} />;
     return <DragMatchPuzzle config={puzzle} onSolve={onSolve} />;
   };
 

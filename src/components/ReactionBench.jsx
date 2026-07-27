@@ -11,19 +11,28 @@ import { C, titleFont, bodyFont, pixelBorder } from "../theme.js";
              reagents:[{name,formula,color,correct,explain}], successMsg }
 */
 
-function Bottle({ color, size = 52 }) {
-  // clean reagent bottle: cork + glass body + colored liquid + shine (no crammed text)
+function Bottle({ color, size = 50 }) {
+  // cut-corner glass bottle with a soft rim (no harsh black box)
+  const glass = "#e9eef0", rim = "#9aa6a8";
   return (
-    <svg viewBox="0 0 20 30" width={size} height={size * 1.5} shapeRendering="crispEdges" style={{ imageRendering: "pixelated", display: "block" }}>
+    <svg viewBox="0 0 20 30" width={size} height={size * 1.5} shapeRendering="crispEdges" style={{ imageRendering: "pixelated", display: "block", margin: "0 auto" }}>
       <rect x="8" y="0" width="4" height="3" fill="#b5843f" />
-      <rect x="8" y="3" width="4" height="1" fill="#7a5a2e" />
-      <rect x="8" y="4" width="4" height="3" fill="#dfe8ea" />
-      <rect x="6" y="7" width="8" height="2" fill="#dfe8ea" />
-      <rect x="5" y="9" width="10" height="19" fill="#e9eef0" />
-      <rect x="5" y="9" width="10" height="19" fill="none" stroke="#3a2b1c" strokeWidth="1" />
+      <rect x="8" y="3" width="4" height="1" fill="#8a6a38" />
+      <rect x="9" y="4" width="2" height="3" fill={glass} />
+      <rect x="8" y="7" width="4" height="1" fill={glass} />
+      <rect x="7" y="8" width="6" height="1" fill={glass} />
+      <rect x="6" y="9" width="8" height="1" fill={glass} />
+      <rect x="5" y="10" width="10" height="17" fill={glass} />
+      <rect x="6" y="27" width="8" height="1" fill={glass} />
+      <rect x="5" y="10" width="1" height="17" fill={rim} />
+      <rect x="14" y="10" width="1" height="17" fill={rim} />
+      <rect x="6" y="9" width="8" height="1" fill={rim} />
+      <rect x="6" y="27" width="8" height="1" fill={rim} />
+      <rect x="7" y="8" width="1" height="1" fill={rim} />
+      <rect x="12" y="8" width="1" height="1" fill={rim} />
       <rect x="6" y="16" width="8" height="11" fill={color} />
-      <rect x="6" y="15" width="8" height="1" fill="#ffffff" fillOpacity="0.55" />
-      <rect x="7" y="11" width="1" height="14" fill="#ffffff" fillOpacity="0.4" />
+      <rect x="6" y="15" width="8" height="1" fill="#ffffff" fillOpacity="0.5" />
+      <rect x="7" y="11" width="1" height="14" fill="#ffffff" fillOpacity="0.45" />
     </svg>
   );
 }
@@ -147,9 +156,10 @@ export default function ReactionBench({ config, onSolve }) {
                   onPointerMove={onMove}
                   onPointerUp={(e) => onUp(e, r, i)}
                   style={{
-                    textAlign: "center", cursor: used ? "not-allowed" : "grab",
+                    display: "flex", flexDirection: "column", alignItems: "center",
+                    cursor: used ? "not-allowed" : "grab",
                     opacity: used ? 0.35 : drag?.i === i ? 0.25 : 1,
-                    touchAction: "none", userSelect: "none",
+                    touchAction: "none", userSelect: "none", width: 96,
                   }}
                 >
                   <Bottle color={r.color} />

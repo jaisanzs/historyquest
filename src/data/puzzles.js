@@ -65,19 +65,16 @@ export const PUZZLES = {
   },
 
   molina: {
-    type: "match", sceneId: "science", to: "choice", ordered: false,
-    prompt: "Sort these: which ones reach the ozone layer and destroy it?",
-    targets: [
-      { id: "harm", label: "Destroys ozone" },
-      { id: "safe", label: "Harmless to ozone" },
+    type: "reactor", sceneId: "science", to: "choice",
+    prompt: "Run the chain reaction that thins the ozone layer.",
+    vessel: { from: "#9fd3e0", to: "#c7b39a" },
+    steps: [
+      { id: "release", label: "Release CFC", icon: "spray" },
+      { id: "rise", label: "Drift up", icon: "up" },
+      { id: "uv", label: "Hit with UV", icon: "uv" },
+      { id: "destroy", label: "Free Cl \u2192 break ozone", icon: "ozone" },
     ],
-    items: [
-      { label: "CFC (spray-can gas)", target: "harm" },
-      { label: "Free chlorine atom", target: "harm" },
-      { label: "Oxygen (O₂)", target: "safe" },
-      { label: "Nitrogen (N₂)", target: "safe" },
-    ],
-    successMsg: "Right. CFCs drift up intact, UV frees their chlorine, and one chlorine atom can wreck tens of thousands of ozone molecules.",
+    successMsg: "One freed chlorine atom destroys tens of thousands of ozone molecules \u2014 the hole Molina predicted.",
   },
 
   rillieux: {
@@ -94,16 +91,11 @@ export const PUZZLES = {
   },
 
   curie: {
-    type: "match", sceneId: "isolate", to: "win", ordered: true,
-    prompt: "Order how Curie pulled radium out of tons of ore.",
-    targets: [{ id: "s1", label: "" }, { id: "s2", label: "" }, { id: "s3", label: "" }, { id: "s4", label: "" }],
-    items: [
-      { label: "Notice pitchblende is too radioactive for its uranium", target: "s1" },
-      { label: "Dissolve tons of ore in acid", target: "s2" },
-      { label: "Fractional crystallization: dissolve, then re-crystallize", target: "s3" },
-      { label: "Repeat over and over → the radium concentrates", target: "s4" },
-    ],
-    successMsg: "Yes — radium chloride is slightly less soluble than barium, so each cycle leaves the radium a bit more concentrated.",
+    type: "spin", sceneId: "isolate", to: "win",
+    prompt: "Spin the crystallizer over and over to concentrate the radium.",
+    spins: 5,
+    label: "Radium purity",
+    successMsg: "After years of this, Curie isolated about a tenth of a gram of pure radium from tons of ore.",
   },
 
   elion: {
@@ -120,16 +112,16 @@ export const PUZZLES = {
   },
 
   hodgkin: {
-    type: "match", sceneId: "how", to: "penicillin", ordered: true,
-    prompt: "Order how Hodgkin read a molecule's shape from X-rays.",
-    targets: [{ id: "s1", label: "" }, { id: "s2", label: "" }, { id: "s3", label: "" }, { id: "s4", label: "" }],
-    items: [
-      { label: "Grow the molecule into a pure crystal", target: "s1" },
-      { label: "Fire X-rays through the crystal", target: "s2" },
-      { label: "Record the pattern of diffraction spots", target: "s3" },
-      { label: "Compute the 3-D position of every atom", target: "s4" },
+    type: "reactor", sceneId: "how", to: "penicillin",
+    prompt: "Read the molecule's shape with the X-ray machine.",
+    vessel: { from: "#dfe8ea", to: "#8a86c8" },
+    steps: [
+      { id: "crystal", label: "Mount crystal", icon: "crystal" },
+      { id: "xray", label: "Fire X-rays", icon: "xray" },
+      { id: "capture", label: "Capture spots", icon: "capture" },
+      { id: "compute", label: "Compute structure", icon: "compute" },
     ],
-    successMsg: "That's X-ray crystallography — how she mapped penicillin, then vitamin B12's 1,000+ atoms.",
+    successMsg: "That diffraction pattern reveals every atom \u2014 how Hodgkin mapped penicillin and vitamin B12.",
   },
 
   haber: {
