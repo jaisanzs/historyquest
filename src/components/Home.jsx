@@ -95,7 +95,7 @@ export default function Home({ onPick }) {
       </div>
 
       <p style={{ ...bodyFont, textAlign: "center", color: C.inkSoft, fontSize: 19, marginTop: 26 }}>
-        Finish a story and its quiz to earn a ★ badge. Alice Ball has a hands-on chemistry puzzle — more coming.
+        Finish a story and its quiz to earn a ★ badge.
       </p>
     </div>
   );
