@@ -65,4 +65,34 @@ export const FIGURES = [
     accent: "#9a9a5a", accent2: "#6a6a34", playable: true,
     portrait: { skin: "#e6c0a0", skinDark: "#c99e78", hair: "#b7b0a4", bald: 1, sideHair: "#b7b0a4", glasses: 1, glassColor: "#6a6258", mustache: 1, stache: "#8a8074", attire: "#2b2b30", collar: "#cfc8ba" },
   },
+  {
+    id: "tu", name: "Tu Youyou", years: "1930\u20132022", field: "Pharmaceutical Chemistry",
+    hook: "Read a 1,600-year-old recipe and pulled a malaria cure from a weed.",
+    accent: "#c0563f", accent2: "#8f3a2a", playable: true,
+    portrait: { skin: "#e7c6a0", skinDark: "#c9a57e", hair: "#1c1712", hairTop: 1, longSides: 1, attire: "#f2efe6", collar: "#c8c2b2" },
+  },
+  {
+    id: "meitner", name: "Lise Meitner", years: "1878\u20131968", field: "Nuclear Physics",
+    hook: "Explained how atoms split \u2014 then watched a colleague take the Nobel alone.",
+    accent: "#6a86a0", accent2: "#46607a", playable: true,
+    portrait: { skin: "#e9c6a4", skinDark: "#cda580", hair: "#6a5a48", hairTop: 1, bun: 1, attire: "#2a2733", collar: "#4a4657" },
+  },
+  {
+    id: "franklin", name: "Rosalind Franklin", years: "1920\u20131958", field: "X-ray Crystallography",
+    hook: "Her photograph revealed DNA's shape. Two men got the glory.",
+    accent: "#b56c9a", accent2: "#834a70", playable: true,
+    portrait: { skin: "#ecc9a6", skinDark: "#d0a882", hair: "#2e2119", hairTop: 1, longSides: 1, attire: "#6a5560", collar: "#c8b8c0" },
+  },
+  {
+    id: "nobel", name: "Alfred Nobel", years: "1833\u20131896", field: "Chemistry / Explosives",
+    hook: "Tamed nitroglycerin into dynamite \u2014 and founded a prize to redeem it.",
+    accent: "#c06a33", accent2: "#8a4a22", playable: true,
+    portrait: { skin: "#e6c0a0", skinDark: "#c99e78", hair: "#4a3a2a", receding: 1, beard: 1, mustache: 1, attire: "#2b2730", collar: "#cfc8ba" },
+  },
+  {
+    id: "mendeleev", name: "Dmitri Mendeleev", years: "1834\u20131907", field: "Chemistry",
+    hook: "Left blank squares in his table and dared nature to fill them.",
+    accent: "#96566f", accent2: "#6a3c50", playable: true,
+    portrait: { skin: "#e6c0a0", skinDark: "#c99e78", hair: "#8a7a6a", hairTop: 1, longSides: 1, beard: 1, mustache: 1, attire: "#3a3630", collar: "#cfc8ba" },
+  },
 ];

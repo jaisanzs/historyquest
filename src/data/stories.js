@@ -8,6 +8,11 @@ import { MOLINA_STORY } from "./molinaStory.js";
 import { ELION_STORY } from "./elionStory.js";
 import { HODGKIN_STORY } from "./hodgkinStory.js";
 import { HABER_STORY } from "./haberStory.js";
+import { TU_STORY } from "./tuStory.js";
+import { MEITNER_STORY } from "./meitnerStory.js";
+import { FRANKLIN_STORY } from "./franklinStory.js";
+import { NOBEL_STORY } from "./nobelStory.js";
+import { MENDELEEV_STORY } from "./mendeleevStory.js";
 
 // Registry mapping a figure id -> its story graph.
 export const STORIES = {
@@ -21,4 +26,9 @@ export const STORIES = {
   elion: ELION_STORY,
   hodgkin: HODGKIN_STORY,
   haber: HABER_STORY,
+  tu: TU_STORY,
+  meitner: MEITNER_STORY,
+  franklin: FRANKLIN_STORY,
+  nobel: NOBEL_STORY,
+  mendeleev: MENDELEEV_STORY,
 };

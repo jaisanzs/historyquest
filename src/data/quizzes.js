@@ -41,4 +41,24 @@ export const QUIZZES = {
     { q: "The Haber–Bosch process pulls nitrogen from the air to make...", options: ["Ammonia for fertilizer", "Gold", "Oxygen"], answer: 0 },
     { q: "Why is Haber a morally complex figure?", options: ["He faked his results", "His chemistry fed billions, but he also created chemical weapons", "He never finished his work"], answer: 1 },
   ],
+  tu: [
+    { q: "What was Tu Youyou's key insight for extracting artemisinin?", options: ["Boil the herb longer", "Use a low-temperature (ether) extraction so heat wouldn't destroy it", "Add much more wormwood"], answer: 1 },
+    { q: "Where did the crucial clue come from?", options: ["A 1,600-year-old Chinese medical text", "A modern textbook", "A lucky guess"], answer: 0 },
+  ],
+  meitner: [
+    { q: "What did Meitner realize the uranium nucleus had done?", options: ["Grown heavier", "Split into lighter elements like barium (fission)", "Vanished completely"], answer: 1 },
+    { q: "Why was Meitner left off the discovery and the Nobel?", options: ["She refused any credit", "As a Jewish woman in Nazi Germany, her colleague published without her", "She had already died"], answer: 1 },
+  ],
+  franklin: [
+    { q: "What did Franklin carefully control to get a clear DNA image?", options: ["The temperature only", "The humidity around the DNA fiber", "The color of the X-rays"], answer: 1 },
+    { q: "How did Watson and Crick come to see Photo 51?", options: ["Franklin mailed it to them", "A colleague showed it to them without her permission", "They photographed their own"], answer: 1 },
+  ],
+  nobel: [
+    { q: "How did Nobel make nitroglycerin safe to handle?", options: ["He froze it solid", "He soaked it into kieselguhr (diatomaceous earth)", "He watered it down"], answer: 1 },
+    { q: "Why did Nobel create the Nobel Prizes?", options: ["A government ordered him to", "A premature obituary calling him 'the merchant of death' shook him", "He won them in a contest"], answer: 1 },
+  ],
+  mendeleev: [
+    { q: "What did Mendeleev do with the gaps in his table?", options: ["Ignored them", "Predicted undiscovered elements and their properties", "Filled them with made-up elements"], answer: 1 },
+    { q: "Which predicted element did the discovery of gallium confirm?", options: ["Eka-silicon", "Eka-aluminium", "Eka-boron"], answer: 1 },
+  ],
 };

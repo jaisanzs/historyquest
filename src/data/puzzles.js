@@ -119,10 +119,71 @@ export const PUZZLES = {
     type: "dial", sceneId: "science", to: "win",
     prompt: "Tune the reactor to squeeze the most ammonia out of N₂ + H₂.",
     note: "Making ammonia shrinks the gas, so high pressure helps. But too hot tears it back apart — a catalyst lets a medium temperature work.",
+    meterLabel: "Ammonia yield", doneLabel: "Max yield!",
     dials: [
       { label: "Pressure", min: 1, max: 300, step: 10, unit: " atm", target: [200, 300], start: 1 },
       { label: "Temperature", min: 100, max: 900, step: 25, unit: "°C", target: [350, 500], start: 900 },
     ],
     successMsg: "High pressure + a moderate temperature (with an iron catalyst) gives the most ammonia. That's the Haber–Bosch process that feeds half the world.",
+  },
+  tu: {
+    type: "reaction", sceneId: "extract", to: "proof",
+    prompt: "Pull the antimalarial compound out of the wormwood without destroying it.",
+    start: { name: "Sweet wormwood", formula: "qinghao", color: "#6f8f3a" },
+    goal: { name: "Artemisinin", formula: "intact!", color: "#7fa650" },
+    reagents: [
+      { name: "Boiling water", formula: "100\u00b0C", color: "#c96f6f", correct: false, explain: "Too hot \u2014 boiling destroys the active compound. That's exactly why earlier attempts failed." },
+      { name: "Hot distillation", formula: "high heat", color: "#b8b2a6", correct: false, explain: "Still too hot. The molecule breaks down before you can collect it." },
+      { name: "Cold ether", formula: "low temp", color: "#6fa8dc", correct: true, explain: "Yes! Ether boils at a low temperature, so a cold extraction leaves artemisinin intact \u2014 the clue hidden in a 340 AD text." },
+    ],
+    successMsg: "Cold extraction saves the molecule \u2014 100% effective against the malaria parasite.",
+  },
+
+  meitner: {
+    type: "reactor", sceneId: "split", to: "explain",
+    prompt: "Split the uranium nucleus, step by step.",
+    vessel: { from: "#6a86a0", to: "#e0a24e" },
+    steps: [
+      { id: "fire", label: "Fire a neutron", icon: "up" },
+      { id: "absorb", label: "Nucleus absorbs it", icon: "capture" },
+      { id: "split", label: "It splits into barium", icon: "ozone" },
+      { id: "energy", label: "Energy + neutrons fly out", icon: "uv" },
+    ],
+    successMsg: "The nucleus split in two, releasing ~200 million eV and more neutrons \u2014 a chain reaction. Meitner named it 'fission.'",
+  },
+
+  franklin: {
+    type: "spin", sceneId: "expose", to: "reveal",
+    prompt: "Hold the fiber at the right humidity and expose the film \u2014 hour after hour \u2014 to capture Photo 51.",
+    spins: 5, label: "Image clarity", machineLabel: "X-ray camera", doneLabel: "Photo 51 captured!",
+    glow: "#c98fb0", glowLite: "#f0d6e6",
+    hint: "Real exposure took about 100 hours. Keep going.",
+    successMsg: "A stark black X emerges \u2014 the unmistakable signature of a helix.",
+  },
+
+  nobel: {
+    type: "meter", sceneId: "stabilize", to: "result",
+    prompt: "Soak the nitroglycerin into a powder until it's stable enough to handle.",
+    meterLabel: "Stability", start: 15, goal: 100,
+    hint: "Most powders are too weak. One porous earth soaks up enough to matter.",
+    options: [
+      { label: "Kieselguhr", delta: 30, kind: "good", icon: "cube" },
+      { label: "Sawdust", delta: 6, kind: "bad", icon: "leaf" },
+      { label: "Charcoal", delta: 6, kind: "bad", icon: "cube" },
+      { label: "Brick dust", delta: 5, kind: "bad", icon: "cube" },
+    ],
+    successMsg: "Kieselguhr \u2014 fossil diatom powder \u2014 soaks up the nitroglycerin into a safe putty: dynamite.",
+  },
+
+  mendeleev: {
+    type: "dial", sceneId: "predict", to: "proof",
+    prompt: "Predict the missing element (eka-aluminium). Set its atomic mass and density to match what nature will reveal.",
+    note: "Read across from its neighbors in the table to estimate the gap.",
+    meterLabel: "Prediction match", doneLabel: "It's a match!",
+    dials: [
+      { label: "Atomic mass", min: 40, max: 90, step: 1, unit: "", target: [66, 71], start: 40 },
+      { label: "Density", min: 2, max: 10, step: 0.5, unit: " g/cm\u00b3", target: [5.5, 6.5], start: 2 },
+    ],
+    successMsg: "In 1875 gallium appeared \u2014 mass 69.7, density 5.9 \u2014 almost exactly your prediction. The periodic table was proven.",
   },
 };

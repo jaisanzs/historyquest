@@ -44,7 +44,7 @@ export default function DialPuzzle({ config, onSolve }) {
       {/* yield meter */}
       <div style={{ ...pixelBorder(), background: C.card, padding: "10px 14px", marginTop: 4 }}>
         <div style={{ display: "flex", justifyContent: "space-between", ...titleFont, fontSize: 9, color: C.ink, marginBottom: 8 }}>
-          <span>Ammonia yield</span><span>{yieldPct}%</span>
+          <span>{config.meterLabel || "Yield"}</span><span>{yieldPct}%</span>
         </div>
         <div style={{ height: 16, background: C.paperDark, border: `2px solid ${C.border}` }}>
           <div style={{ width: `${yieldPct}%`, height: "100%", background: solved ? C.green : C.gold, transition: "width .2s" }} />
@@ -54,7 +54,7 @@ export default function DialPuzzle({ config, onSolve }) {
       {solved && (
         <div style={{ marginTop: 14 }}>
           <div style={{ ...pixelBorder(C.greenDeep), background: "#eef6df", padding: "12px 14px" }}>
-            <div style={{ ...titleFont, fontSize: 9, color: C.greenDeep, marginBottom: 6 }}>✓ Max yield!</div>
+            <div style={{ ...titleFont, fontSize: 9, color: C.greenDeep, marginBottom: 6 }}>✓ {config.doneLabel || "Max yield!"}</div>
             <div style={{ ...bodyFont, fontSize: 19, color: C.ink, lineHeight: 1.2 }}>{config.successMsg}</div>
           </div>
           <button onClick={onSolve} style={{ ...bodyFont, fontSize: 21, color: "#fff", background: C.greenDeep, border: `3px solid ${C.border}`, boxShadow: `3px 3px 0 ${C.border}`, padding: "10px 16px", cursor: "pointer", marginTop: 12 }}>
