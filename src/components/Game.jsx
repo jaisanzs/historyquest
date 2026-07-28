@@ -153,7 +153,7 @@ export default function Game({ figureId, onHome }) {
       </div>
 
       <p style={{ ...bodyFont, textAlign: "center", color: C.inkSoft, fontSize: 18, marginTop: 16 }}>
-        Choices grounded in real history. Wrong turns teach, they don't punish.
+        Choices grounded in real history.
       </p>
     </div>
   );
